@@ -1,10 +1,15 @@
 <launch>
 	<arg name="model" />
-	<param name="robot_description" command="$(find xacro)/xacro '$(find hunter_se_description)/urdf/hunter_se_description.xacro'" />
+	<!--load Hunter_se model-->
+  <param name="robot_description" command="$(find xacro)/xacro '$(find hunter_se_description)/urdf/hunter_se_description.xacro'" />
   <node name="robot_state_publisher" pkg="robot_state_publisher" type="robot_state_publisher" />
   <node name="joint_state_publisher" pkg="joint_state_publisher" type="joint_state_publisher"/>
-	<include file="$(find velodyne_pointcloud)/launch/VLP16_points.launch" />
+	
+  <!--start sensors-->
+  <include file="$(find velodyne_pointcloud)/launch/VLP16_points.launch" />
 	<include file="$(find zed_wrapper)/launch/zed2.launch" />
   <node pkg="tf" type="static_transform_publisher" name="map_to_odom" args="0.0 0.0 0.287 0.0 0.0 0.0 map odom 100" />
-	<node name="rviz" pkg="rviz" type="rviz" args="-d $(find hunter_se_op)/rviz/hunter_se.rviz" />
+	
+  <!--visualization-->
+  <node name="rviz" pkg="rviz" type="rviz" args="-d $(find hunter_se_op)/rviz/hunter_se.rviz" />
 </launch>
