@@ -23,8 +23,19 @@
     ```
 TODO: check the internet link to velodyne
 
+
 4. Start camera, lidar, hunter_se
 
     ```
     launch hunter_se_op hunter_se_op.launch
+    ```
+
+5. Start perception related package
+
+    ```
+    cd ~/catkin_ws
+    source devel/setup.bash
+
+    roslaunch rover_planner_ros hunter_se_perception.launch
+    roslaunch rover_planner_ros hunter_se_planner.launch
     ```
